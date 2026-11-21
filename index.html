@@ -3,209 +3,518 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#493329">
   <title>Semester 3 Planner - Muhammad Talkhis Al-Rawi</title>
+
   <style>
     :root {
-      --bg: #f4f6fb;
-      --card: #ffffff;
-      --text: #1e2433;
-      --muted: #667085;
-      --primary: #3b5bdb;
-      --border: #e3e7ef;
-      --chip: #eef2ff;
+      --bg: #f5f0e9;
+      --card: #fffdf9;
+      --text: #382820;
+      --muted: #8a786b;
+      --primary: #654735;
+      --secondary: #8c684d;
+      --gold: #c6a36b;
+      --border: #e8ddd0;
+      --chip: #f0e5d7;
     }
+
     :root[data-theme="dark"] {
-      --bg: #0f1420;
-      --card: #1a2133;
-      --text: #e8ecf5;
-      --muted: #98a2b8;
-      --primary: #7c9cff;
-      --border: #2a3350;
-      --chip: #232c47;
+      --bg: #1c1714;
+      --card: #2b221d;
+      --text: #f4eade;
+      --muted: #b9a697;
+      --primary: #c19a70;
+      --secondary: #a77d5a;
+      --gold: #d5b47b;
+      --border: #49382e;
+      --chip: #403127;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.5;
-    }
-    header {
-      background: linear-gradient(135deg, #3b5bdb, #5f3dc4);
-      color: #fff;
-      padding: 40px 20px 90px;
-      text-align: center;
-    }
-    header h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); letter-spacing: .01em; }
-    header p { opacity: .9; margin-top: 6px; }
-    main {
-      max-width: 1000px;
-      margin: -60px auto 40px;
-      padding: 0 16px;
+      line-height: 1.6;
+      transition: .3s;
     }
 
-    /* Kartu profil */
+    header {
+      background: linear-gradient(135deg, #39271e, #654735, #94704f);
+      color: #fffaf2;
+      text-align: center;
+      padding: 60px 20px 110px;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin-top: 10px;
+      color: #e9d9c4;
+    }
+
+    .header-line {
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 20px auto 0;
+      border-radius: 10px;
+    }
+
+    main {
+      max-width: 1050px;
+      margin: -70px auto 45px;
+      padding: 0 18px;
+    }
+
     .profil {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      gap: 22px;
+      gap: 28px;
+      padding: 28px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, .1);
+      border-radius: 20px;
+      box-shadow: 0 8px 28px rgba(65,43,29,.09);
     }
-    .foto {
-      width: 130px;
-      height: 170px;
-      object-fit: cover;
-      object-position: center top;
-      border-radius: 16px;
-      border: 4px solid var(--primary);
-      background: var(--chip);
+
+    .foto-wrapper {
       flex-shrink: 0;
+      padding: 5px;
+      border: 2px solid var(--gold);
+      border-radius: 17px;
+      background: var(--chip);
     }
-    .profil-info { flex: 1 1 260px; }
-    .profil-info h2 { font-size: 1.35rem; }
-    .profil-info .sub { color: var(--muted); font-size: .95rem; margin-top: 2px; }
+
+    .foto {
+      display: block;
+      width: 145px;
+      height: 180px;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: 12px;
+    }
+
+    .profil-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .label-profil {
+      display: inline-block;
+      color: var(--secondary);
+      background: var(--chip);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 5px 12px;
+      border-radius: 30px;
+      margin-bottom: 10px;
+    }
+
+    .profil-info h2 {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+    }
+
+    .sub {
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
     .data {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 10px 20px;
-      margin-top: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 15px;
+      margin-top: 22px;
     }
-    .data div { font-size: .9rem; }
+
+    .data-item {
+      border-left: 3px solid var(--gold);
+      padding-left: 12px;
+    }
+
     .data span {
       display: block;
-      font-size: .75rem;
-      text-transform: uppercase;
-      letter-spacing: .04em;
       color: var(--muted);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
-    .data b { font-weight: 600; }
 
-    /* Kontrol pencarian dan filter */
+    .data b {
+      display: block;
+      margin-top: 4px;
+      font-size: .91rem;
+    }
+
+    .section-heading {
+      margin: 32px 4px 15px;
+    }
+
+    .section-heading h2 {
+      font-size: 1.3rem;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-top: 3px;
+    }
+
     .controls {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      margin-top: 16px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 8px 28px rgba(65,43,29,.07);
     }
-    .controls input, .controls select, .controls button {
+
+    .controls input,
+    .controls select,
+    .controls button {
       font: inherit;
       color: var(--text);
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 10px 12px;
+      padding: 11px 14px;
+      outline: none;
     }
-    .controls input { flex: 1 1 200px; }
-    .controls button { cursor: pointer; }
-    .controls button:hover { border-color: var(--primary); }
-    .info { margin: 16px 4px; color: var(--muted); font-size: .9rem; }
 
-    /* Kartu jadwal */
+    .controls input {
+      flex: 1 1 240px;
+      min-width: 0;
+    }
+
+    .controls input:focus,
+    .controls select:focus {
+      border-color: var(--gold);
+    }
+
+    .controls button {
+      cursor: pointer;
+      background: var(--primary);
+      color: #fffaf2;
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .controls button:hover {
+      background: var(--secondary);
+    }
+
+    .info {
+      color: var(--muted);
+      font-size: .88rem;
+      margin: 18px 5px;
+    }
+
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 17px;
     }
+
     .card {
+      position: relative;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px;
-      border-left: 5px solid var(--primary);
-      transition: transform .15s ease, box-shadow .15s ease;
+      border-radius: 16px;
+      padding: 21px;
+      box-shadow: 0 8px 28px rgba(65,43,29,.07);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
     }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--gold), var(--primary));
+    }
+
     .card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(65,43,29,.14);
     }
-    .no { font-size: .8rem; color: var(--muted); font-weight: 600; }
-    .card h2 { font-size: 1.05rem; margin: 4px 0 10px; }
-    .row { font-size: .92rem; color: var(--muted); margin-top: 6px; }
-    .row b { color: var(--text); font-weight: 600; }
+
+    .no {
+      color: var(--secondary);
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: 1px;
+    }
+
+    .card h2 {
+      font-size: 1.08rem;
+      margin: 7px 0 17px;
+      line-height: 1.45;
+    }
+
+    .row {
+      font-size: .9rem;
+      color: var(--muted);
+      margin-top: 9px;
+    }
+
+    .row b {
+      color: var(--text);
+      font-weight: 650;
+    }
+
     .chip {
-      display: inline-block;
+      display: inline-flex;
       background: var(--chip);
       color: var(--primary);
-      font-size: .78rem;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 999px;
-      margin-top: 12px;
+      font-size: .82rem;
+      font-weight: 750;
+      padding: 7px 14px;
+      border-radius: 30px;
+      margin-top: 17px;
     }
+
     .kosong {
       text-align: center;
       color: var(--muted);
-      padding: 40px 0;
+      background: var(--card);
+      border: 1px dashed var(--border);
+      border-radius: 15px;
+      padding: 35px 15px;
+      margin-top: 15px;
     }
+
     footer {
       text-align: center;
+      padding: 25px 15px 35px;
       color: var(--muted);
       font-size: .85rem;
-      padding: 0 16px 30px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer strong {
+      color: var(--secondary);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 48px 16px 100px;
+      }
+
+      main {
+        padding: 0 13px;
+      }
+
+      .profil {
+        flex-direction: column;
+        text-align: center;
+        padding: 22px 16px;
+        gap: 17px;
+      }
+
+      .foto {
+        width: 140px;
+        height: 175px;
+      }
+
+      .data {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+
+      .controls input,
+      .controls select,
+      .controls button {
+        width: 100%;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <h1>Semester 3 Planner</h1>
-    <p>Jadwal Kuliah &middot; Teknik Informatika &middot; STIKOM CKI Jakarta</p>
+    <p>Jadwal Kuliah · Teknik Informatika · STIKOM CKI Jakarta</p>
+    <div class="header-line"></div>
   </header>
 
   <main>
+
     <section class="profil">
-      <img class="foto" src="foto.jpg" alt="Foto Muhammad Talkhis Al-Rawi">
+
+      <div class="foto-wrapper">
+        <img
+          class="foto"
+          src="./foto.jpg"
+          alt="Foto Muhammad Talkhis Al-Rawi"
+          onerror="this.alt='Foto belum tersedia';"
+        >
+      </div>
+
       <div class="profil-info">
+        <span class="label-profil">STUDENT PROFILE</span>
+
         <h2>Muhammad Talkhis Al-Rawi</h2>
-        <p class="sub">Mahasiswa Teknik Informatika (Sarjana S1)</p>
+
+        <p class="sub">
+          Mahasiswa Teknik Informatika (Sarjana S1)
+        </p>
+
         <div class="data">
-          <div><span>Nama</span><b>Muhammad Talkhis Al-Rawi</b></div>
-          <div><span>Kampus</span><b>STIKOM CKI Jakarta</b></div>
-          <div><span>Program Studi</span><b>Teknik Informatika (S1)</b></div>
+
+          <div class="data-item">
+            <span>Nama</span>
+            <b>Muhammad Talkhis Al-Rawi</b>
+          </div>
+
+          <div class="data-item">
+            <span>Kampus</span>
+            <b>STIKOM CKI Jakarta</b>
+          </div>
+
+          <div class="data-item">
+            <span>Program Studi</span>
+            <b>Teknik Informatika (S1)</b>
+          </div>
+
         </div>
       </div>
     </section>
 
+    <div class="section-heading">
+      <h2>Jadwal Perkuliahan</h2>
+      <p>Daftar mata kuliah Semester 3</p>
+    </div>
+
     <div class="controls">
-      <input type="search" id="cari" placeholder="Cari mata kuliah atau dosen...">
+
+      <input
+        type="search"
+        id="cari"
+        placeholder="Cari mata kuliah atau dosen..."
+      >
+
       <select id="filterHari">
-        <option value="">Semua hari</option>
+        <option value="">Semua Hari</option>
       </select>
-      <button id="tema" type="button">Mode gelap</button>
+
+      <button id="tema" type="button">
+        ☾ Mode Gelap
+      </button>
+
     </div>
 
     <p class="info" id="info"></p>
+
     <section class="grid" id="daftar"></section>
-    <p class="kosong" id="kosong" hidden>Tidak ada jadwal yang cocok.</p>
+
+    <p class="kosong" id="kosong" hidden>
+      Tidak ada jadwal yang cocok.
+    </p>
+
   </main>
 
   <footer>
-    &copy; 2026 Semester 3 Planner &middot; Muhammad Talkhis Al-Rawi &middot; STIKOM CKI Jakarta
+    <p>© 2026 <strong>Semester 3 Planner</strong></p>
+    <p>Muhammad Talkhis Al-Rawi · STIKOM CKI Jakarta</p>
   </footer>
 
   <script>
+
     const jadwal = [
-      { matkul: "Matematika Diskrit (A1)", dosen: "Rasiban, M.Kom", hari: "Senin", tanggal: "2026-10-05", mulai: "10:30", selesai: "13:00" },
-      { matkul: "Pemrograman Berorientasi Objek (A1)", dosen: "Veri Arinal, M.Kom", hari: "Selasa", tanggal: "2026-09-29", mulai: "08:00", selesai: "10:30" },
-      { matkul: "Kewarganegaraan (A1)", dosen: "Sri Lestari, S.Pd, M.M", hari: "Selasa", tanggal: "2026-10-06", mulai: "10:30", selesai: "12:10" },
-      { matkul: "Bahasa Jepang (A1)", dosen: "Dr. H Agus Yulistiyono, S.E., M.M", hari: "Selasa", tanggal: "2026-10-06", mulai: "13:30", selesai: "16:00" },
-      { matkul: "Organisasi dan Arsitektur Komputer (A1)", dosen: "Ivan Muhammad Reza, S.Kom., M.Kom", hari: "Rabu", tanggal: "2026-10-07", mulai: "09:00", selesai: "10:30" },
-      { matkul: "Jaringan Komputer (A1)", dosen: "Yuma Akbar, S.Kom., M.Kom", hari: "Rabu", tanggal: "2026-10-07", mulai: "10:30", selesai: "13:00" },
-      { matkul: "Kecerdasan Buatan (A1)", dosen: "Ivan Muhammad Reza, S.Kom., M.Kom", hari: "Kamis", tanggal: "2026-10-08", mulai: "08:00", selesai: "10:30" },
-      { matkul: "Komputasi Paralel dan Terdistribusi (A1)", dosen: "Veri Arinal, M.Kom", hari: "Jumat", tanggal: "2026-10-09", mulai: "13:00", selesai: "15:30" }
+      {
+        matkul: "Matematika Diskrit (A1)",
+        dosen: "Rasiban, M.Kom",
+        hari: "Senin",
+        tanggal: "2026-10-05",
+        mulai: "10:30",
+        selesai: "13:00"
+      },
+      {
+        matkul: "Pemrograman Berorientasi Objek (A1)",
+        dosen: "Veri Arinal, M.Kom",
+        hari: "Selasa",
+        tanggal: "2026-09-29",
+        mulai: "08:00",
+        selesai: "10:30"
+      },
+      {
+        matkul: "Kewarganegaraan (A1)",
+        dosen: "Sri Lestari, S.Pd, M.M",
+        hari: "Selasa",
+        tanggal: "2026-10-06",
+        mulai: "10:30",
+        selesai: "12:10"
+      },
+      {
+        matkul: "Bahasa Jepang (A1)",
+        dosen: "Dr. H Agus Yulistiyono, S.E., M.M",
+        hari: "Selasa",
+        tanggal: "2026-10-06",
+        mulai: "13:30",
+        selesai: "16:00"
+      },
+      {
+        matkul: "Organisasi dan Arsitektur Komputer (A1)",
+        dosen: "Ivan Muhammad Reza, S.Kom., M.Kom",
+        hari: "Rabu",
+        tanggal: "2026-10-07",
+        mulai: "09:00",
+        selesai: "10:30"
+      },
+      {
+        matkul: "Jaringan Komputer (A1)",
+        dosen: "Yuma Akbar, S.Kom., M.Kom",
+        hari: "Rabu",
+        tanggal: "2026-10-07",
+        mulai: "10:30",
+        selesai: "13:00"
+      },
+      {
+        matkul: "Kecerdasan Buatan (A1)",
+        dosen: "Ivan Muhammad Reza, S.Kom., M.Kom",
+        hari: "Kamis",
+        tanggal: "2026-10-08",
+        mulai: "08:00",
+        selesai: "10:30"
+      },
+      {
+        matkul: "Komputasi Paralel dan Terdistribusi (A1)",
+        dosen: "Veri Arinal, M.Kom",
+        hari: "Jumat",
+        tanggal: "2026-10-09",
+        mulai: "13:00",
+        selesai: "15:30"
+      }
     ];
 
-    // Urutkan berdasarkan tanggal lalu jam mulai
-    jadwal.sort((a, b) => (a.tanggal + a.mulai).localeCompare(b.tanggal + b.mulai));
+    jadwal.sort((a, b) =>
+      (a.tanggal + a.mulai).localeCompare(b.tanggal + b.mulai)
+    );
 
     const elDaftar = document.getElementById("daftar");
     const elCari = document.getElementById("cari");
@@ -215,85 +524,117 @@
     const elTema = document.getElementById("tema");
 
     function formatTanggal(iso) {
-      const d = new Date(iso + "T00:00:00");
-      return d.toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" });
+      const tanggal = new Date(iso + "T00:00:00");
+
+      return tanggal.toLocaleDateString("id-ID", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      });
     }
 
-    // Isi pilihan filter hari
-    const daftarHari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
-    daftarHari.forEach(function (h) {
-      const opt = document.createElement("option");
-      opt.value = h;
-      opt.textContent = h;
-      elHari.appendChild(opt);
+    const daftarHari = [
+      "Senin", "Selasa", "Rabu", "Kamis", "Jumat"
+    ];
+
+    daftarHari.forEach(function(hari) {
+      const option = document.createElement("option");
+      option.value = hari;
+      option.textContent = hari;
+      elHari.appendChild(option);
     });
 
     function tampilkan() {
       const kata = elCari.value.trim().toLowerCase();
       const hari = elHari.value;
 
-      const hasil = jadwal.filter(function (j) {
-        const cocokKata = j.matkul.toLowerCase().includes(kata) || j.dosen.toLowerCase().includes(kata);
-        const cocokHari = hari === "" || j.hari === hari;
+      const hasil = jadwal.filter(function(j) {
+        const cocokKata =
+          j.matkul.toLowerCase().includes(kata) ||
+          j.dosen.toLowerCase().includes(kata);
+
+        const cocokHari =
+          hari === "" || j.hari === hari;
+
         return cocokKata && cocokHari;
       });
 
       elDaftar.innerHTML = "";
-      hasil.forEach(function (j, i) {
+
+      hasil.forEach(function(j, index) {
         const kartu = document.createElement("article");
         kartu.className = "card";
 
-        const no = document.createElement("div");
-        no.className = "no";
-        no.textContent = "#" + (i + 1);
+        const nomor = document.createElement("div");
+        nomor.className = "no";
+        nomor.textContent = "MATA KULIAH #" + (index + 1);
 
         const judul = document.createElement("h2");
         judul.textContent = j.matkul;
 
-        const rowDosen = document.createElement("div");
-        rowDosen.className = "row";
-        rowDosen.innerHTML = "<b>Dosen:</b> ";
-        rowDosen.appendChild(document.createTextNode(j.dosen));
+        const dosen = document.createElement("div");
+        dosen.className = "row";
+        dosen.innerHTML = "<b>Dosen:</b> ";
+        dosen.appendChild(document.createTextNode(j.dosen));
 
-        const rowTanggal = document.createElement("div");
-        rowTanggal.className = "row";
-        rowTanggal.innerHTML = "<b>Tanggal:</b> ";
-        rowTanggal.appendChild(document.createTextNode(j.hari + ", " + formatTanggal(j.tanggal)));
+        const tanggal = document.createElement("div");
+        tanggal.className = "row";
+        tanggal.innerHTML = "<b>Tanggal:</b> ";
+        tanggal.appendChild(
+          document.createTextNode(
+            j.hari + ", " + formatTanggal(j.tanggal)
+          )
+        );
 
-        const chip = document.createElement("span");
-        chip.className = "chip";
-        chip.textContent = j.mulai + " - " + j.selesai;
+        const waktu = document.createElement("span");
+        waktu.className = "chip";
+        waktu.textContent = j.mulai + " - " + j.selesai;
 
-        kartu.append(no, judul, rowDosen, rowTanggal, chip);
+        kartu.append(nomor, judul, dosen, tanggal, waktu);
         elDaftar.appendChild(kartu);
       });
 
-      elInfo.textContent = "Menampilkan " + hasil.length + " dari " + jadwal.length + " mata kuliah";
+      elInfo.textContent =
+        "Menampilkan " + hasil.length +
+        " dari " + jadwal.length + " mata kuliah";
+
       elKosong.hidden = hasil.length !== 0;
     }
 
-    // Tema gelap / terang
     function aturTema(tema) {
       document.documentElement.setAttribute("data-theme", tema);
-      elTema.textContent = tema === "dark" ? "Mode terang" : "Mode gelap";
+
+      elTema.textContent =
+        tema === "dark" ? "☀ Mode Terang" : "☾ Mode Gelap";
     }
 
     let temaAwal = "light";
+
     try {
-      temaAwal = localStorage.getItem("tema") ||
-        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    } catch (e) {}
+      temaAwal = localStorage.getItem("tema") || "light";
+    } catch (error) {}
+
     aturTema(temaAwal);
 
-    elTema.addEventListener("click", function () {
-      const baru = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    elTema.addEventListener("click", function() {
+      const sekarang =
+        document.documentElement.getAttribute("data-theme");
+
+      const baru = sekarang === "dark" ? "light" : "dark";
+
       aturTema(baru);
-      try { localStorage.setItem("tema", baru); } catch (e) {}
+
+      try {
+        localStorage.setItem("tema", baru);
+      } catch (error) {}
     });
 
     elCari.addEventListener("input", tampilkan);
     elHari.addEventListener("change", tampilkan);
+
     tampilkan();
+
   </script>
+
 </body>
 </html>

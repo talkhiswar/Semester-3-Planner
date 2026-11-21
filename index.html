@@ -49,24 +49,21 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 20px;
+      gap: 22px;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 22px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, .1);
     }
-    .avatar {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #3b5bdb, #5f3dc4);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.9rem;
-      font-weight: 700;
+    .foto {
+      width: 130px;
+      height: 170px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 16px;
+      border: 4px solid var(--primary);
+      background: var(--chip);
       flex-shrink: 0;
     }
     .profil-info { flex: 1 1 260px; }
@@ -163,7 +160,7 @@
 
   <main>
     <section class="profil">
-      <div class="avatar" aria-hidden="true">MT</div>
+      <img class="foto" src="foto.jpg" alt="Foto Muhammad Talkhis Al-Rawi">
       <div class="profil-info">
         <h2>Muhammad Talkhis Al-Rawi</h2>
         <p class="sub">Mahasiswa Teknik Informatika (Sarjana S1)</p>

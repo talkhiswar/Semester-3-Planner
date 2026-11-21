@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jadwal Semester 3</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --card: #ffffff;
+      --text: #1e2433;
+      --muted: #667085;
+      --primary: #3b5bdb;
+      --border: #e3e7ef;
+      --chip: #eef2ff;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0f1420;
+      --card: #1a2133;
+      --text: #e8ecf5;
+      --muted: #98a2b8;
+      --primary: #7c9cff;
+      --border: #2a3350;
+      --chip: #232c47;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    header {
+      background: linear-gradient(135deg, #3b5bdb, #5f3dc4);
+      color: #fff;
+      padding: 40px 20px 56px;
+      text-align: center;
+    }
+    header h1 { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+    header p { opacity: .9; margin-top: 6px; }
+    main {
+      max-width: 1000px;
+      margin: -32px auto 40px;
+      padding: 0 16px;
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .08);
+    }
+    .controls input, .controls select, .controls button {
+      font: inherit;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .controls input { flex: 1 1 200px; }
+    .controls button { cursor: pointer; }
+    .controls button:hover { border-color: var(--primary); }
+    .info { margin: 16px 4px; color: var(--muted); font-size: .9rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      border-left: 5px solid var(--primary);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+    }
+    .no { font-size: .8rem; color: var(--muted); font-weight: 600; }
+    .card h2 { font-size: 1.05rem; margin: 4px 0 10px; }
+    .row { font-size: .92rem; color: var(--muted); margin-top: 6px; }
+    .row b { color: var(--text); font-weight: 600; }
+    .chip {
+      display: inline-block;
+      background: var(--chip);
+      color: var(--primary);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-top: 12px;
+    }
+    .kosong {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px 0;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      padding: 0 16px 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Jadwal Semester 3</h1>
+    <p>Teknik Informatika</p>
+  </header>
+
+  <main>
+    <div class="controls">
+      <input type="search" id="cari" placeholder="Cari mata kuliah atau dosen...">
+      <select id="filterHari">
+        <option value="">Semua hari</option>
+      </select>
+      <button id="tema" type="button">Mode gelap</button>
+    </div>
+
+    <p class="info" id="info"></p>
+    <section class="grid" id="daftar"></section>
+    <p class="kosong" id="kosong" hidden>Tidak ada jadwal yang cocok.</p>
+  </main>
+
+  <footer>Web Semester 3 &middot; Dibuat dengan HTML, CSS, dan JavaScript</footer>
+
+  <script>
+    const jadwal = [
+      { matkul: "Matematika Diskrit (A1)", dosen: "Rasiban, M.Kom", hari: "Senin", tanggal: "2026-10-05", mulai: "10:30", selesai: "13:00" },
+      { matkul: "Pemrograman Berorientasi Objek (A1)", dosen: "Veri Arinal, M.Kom", hari: "Selasa", tanggal: "2026-09-29", mulai: "08:00", selesai: "10:30" },
+      { matkul: "Kewarganegaraan (A1)", dosen: "Sri Lestari, S.Pd, M.M", hari: "Selasa", tanggal: "2026-10-06", mulai: "10:30", selesai: "12:10" },
+      { matkul: "Bahasa Jepang (A1)", dosen: "Dr. H Agus Yulistiyono, S.E., M.M", hari: "Selasa", tanggal: "2026-10-06", mulai: "13:30", selesai: "16:00" },
+      { matkul: "Organisasi dan Arsitektur Komputer (A1)", dosen: "Ivan Muhammad Reza, S.Kom., M.Kom", hari: "Rabu", tanggal: "2026-10-07", mulai: "09:00", selesai: "10:30" },
+      { matkul: "Jaringan Komputer (A1)", dosen: "Yuma Akbar, S.Kom., M.Kom", hari: "Rabu", tanggal: "2026-10-07", mulai: "10:30", selesai: "13:00" },
+      { matkul: "Kecerdasan Buatan (A1)", dosen: "Ivan Muhammad Reza, S.Kom., M.Kom", hari: "Kamis", tanggal: "2026-10-08", mulai: "08:00", selesai: "10:30" },
+      { matkul: "Komputasi Paralel dan Terdistribusi (A1)", dosen: "Veri Arinal, M.Kom", hari: "Jumat", tanggal: "2026-10-09", mulai: "13:00", selesai: "15:30" }
+    ];
+
+    // Urutkan berdasarkan tanggal lalu jam mulai
+    jadwal.sort((a, b) => (a.tanggal + a.mulai).localeCompare(b.tanggal + b.mulai));
+
+    const elDaftar = document.getElementById("daftar");
+    const elCari = document.getElementById("cari");
+    const elHari = document.getElementById("filterHari");
+    const elInfo = document.getElementById("info");
+    const elKosong = document.getElementById("kosong");
+    const elTema = document.getElementById("tema");
+
+    function formatTanggal(iso) {
+      const d = new Date(iso + "T00:00:00");
+      return d.toLocaleDateString("id-ID", { day: "2-digit", month: "long", year: "numeric" });
+    }
+
+    // Isi pilihan filter hari
+    const daftarHari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
+    daftarHari.forEach(function (h) {
+      const opt = document.createElement("option");
+      opt.value = h;
+      opt.textContent = h;
+      elHari.appendChild(opt);
+    });
+
+    function tampilkan() {
+      const kata = elCari.value.trim().toLowerCase();
+      const hari = elHari.value;
+
+      const hasil = jadwal.filter(function (j) {
+        const cocokKata = j.matkul.toLowerCase().includes(kata) || j.dosen.toLowerCase().includes(kata);
+        const cocokHari = hari === "" || j.hari === hari;
+        return cocokKata && cocokHari;
+      });
+
+      elDaftar.innerHTML = "";
+      hasil.forEach(function (j, i) {
+        const kartu = document.createElement("article");
+        kartu.className = "card";
+
+        const no = document.createElement("div");
+        no.className = "no";
+        no.textContent = "#" + (i + 1);
+
+        const judul = document.createElement("h2");
+        judul.textContent = j.matkul;
+
+        const rowDosen = document.createElement("div");
+        rowDosen.className = "row";
+        rowDosen.innerHTML = "<b>Dosen:</b> ";
+        rowDosen.appendChild(document.createTextNode(j.dosen));
+
+        const rowTanggal = document.createElement("div");
+        rowTanggal.className = "row";
+        rowTanggal.innerHTML = "<b>Tanggal:</b> ";
+        rowTanggal.appendChild(document.createTextNode(j.hari + ", " + formatTanggal(j.tanggal)));
+
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = j.mulai + " - " + j.selesai;
+
+        kartu.append(no, judul, rowDosen, rowTanggal, chip);
+        elDaftar.appendChild(kartu);
+      });
+
+      elInfo.textContent = "Menampilkan " + hasil.length + " dari " + jadwal.length + " mata kuliah";
+      elKosong.hidden = hasil.length !== 0;
+    }
+
+    // Tema gelap / terang
+    function aturTema(tema) {
+      document.documentElement.setAttribute("data-theme", tema);
+      elTema.textContent = tema === "dark" ? "Mode terang" : "Mode gelap";
+    }
+
+    let temaAwal = "light";
+    try {
+      temaAwal = localStorage.getItem("tema") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    } catch (e) {}
+    aturTema(temaAwal);
+
+    elTema.addEventListener("click", function () {
+      const baru = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      aturTema(baru);
+      try { localStorage.setItem("tema", baru); } catch (e) {}
+    });
+
+    elCari.addEventListener("input", tampilkan);
+    elHari.addEventListener("change", tampilkan);
+    tampilkan();
+  </script>
+</body>
+</html>

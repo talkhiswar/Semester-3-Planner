@@ -1,641 +1,693 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="ai">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#493329">
-  <title>Semester 3 Planner - Muhammad Talkhis Al-Rawi</title>
-  <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%233D2B1F"/><stop offset="55%" stop-color="%235C4033"/><stop offset="100%" stop-color="%238B6B3D"/></linearGradient><linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%23F0D78C"/><stop offset="100%" stop-color="%23C9A14A"/></linearGradient></defs><rect width="512" height="512" rx="108" ry="108" fill="url(%23bg)"/><rect x="18" y="18" width="476" height="476" rx="96" ry="96" fill="none" stroke="url(%23gold)" stroke-width="10" opacity="0.75"/><rect x="110" y="95" width="292" height="58" rx="16" fill="url(%23gold)"/><rect x="110" y="145" width="292" height="260" rx="16" fill="none" stroke="url(%23gold)" stroke-width="10"/><text x="256" y="310" font-family="Georgia, &apos;Times New Roman&apos;, serif" font-size="195" font-weight="700" fill="%23F8EED9" text-anchor="middle" dominant-baseline="middle">3</text><text x="256" y="430" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="600" fill="%23E8C47A" text-anchor="middle" letter-spacing="3">PLANNER</text></svg>'>
-
+  <meta name="description" content="Semester 3 Planner: jadwal kuliah semester 3 Teknik Informatika STIKOM CKI Jakarta.">
+  <meta name="theme-color" id="metaTema" content="#0f1a3a">
+  <title>Semester 3 Planner</title>
+  <link id="ikon" rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0f1e'/%3E%3Crect x='10' y='14' width='44' height='40' rx='8' fill='none' stroke='%2322d3ee' stroke-width='3'/%3E%3Cpath d='M10 26H54' stroke='%2322d3ee' stroke-width='3'/%3E%3Cpath d='M22 10V18M42 10V18' stroke='%238b5cf6' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M22 44L32 34L42 42' stroke='%238b5cf6' stroke-width='2.5' fill='none' stroke-linejoin='round'/%3E%3Ccircle cx='22' cy='44' r='3.5' fill='%2322d3ee'/%3E%3Ccircle cx='32' cy='34' r='3.5' fill='%2322d3ee'/%3E%3Ccircle cx='42' cy='42' r='3.5' fill='%2322d3ee'/%3E%3C/svg%3E">
   <style>
-    :root {
-      --bg: #f5f0e9;
-      --card: #fffdf9;
-      --text: #382820;
-      --muted: #8a786b;
-      --primary: #654735;
-      --secondary: #8c684d;
-      --gold: #c6a36b;
-      --border: #e8ddd0;
-      --chip: #f0e5d7;
+    :root[data-theme="ai"] {
+      --bg: #0a0f1e; --surface: #111a33; --surface2: #16223f;
+      --text: #e6edf7; --muted: #8fa3c4; --border: #22325c;
+      --primary: #22d3ee; --on-primary: #04111f;
+      --hero1: #0f1a3a; --hero2: #2a1566;
+      --node: #22d3ee; --grid: rgba(34, 211, 238, .07);
+      --orb1: #22d3ee; --orb2: #8b5cf6;
+      --shadow: 0 8px 28px rgba(0, 0, 0, .5);
+      --hero-muted: #a9bddf;
     }
-
-    :root[data-theme="dark"] {
-      --bg: #1c1714;
-      --card: #2b221d;
-      --text: #f4eade;
-      --muted: #b9a697;
-      --primary: #c19a70;
-      --secondary: #a77d5a;
-      --gold: #d5b47b;
-      --border: #49382e;
-      --chip: #403127;
+    :root[data-theme="emas"] {
+      --bg: #faf6ef; --surface: #fffdf8; --surface2: #f4ecdd;
+      --text: #2b1d12; --muted: #7a6650; --border: #e8dcc6;
+      --primary: #8b5a2b; --on-primary: #ffffff;
+      --hero1: #4a2c14; --hero2: #b8862b;
+      --node: #f6e3b4; --grid: rgba(139, 90, 43, .08);
+      --orb1: #f0c75e; --orb2: #d4a373;
+      --shadow: 0 8px 28px rgba(92, 58, 30, .12);
+      --hero-muted: #f6e3b4;
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
-      transition: .3s;
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 36px 36px;
+      -webkit-mask-image: linear-gradient(#000, transparent 85%);
+      mask-image: linear-gradient(#000, transparent 85%);
     }
 
-    header {
-      background: linear-gradient(135deg, #39271e, #654735, #94704f);
-      color: #fffaf2;
-      text-align: center;
-      padding: 60px 20px 110px;
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(135deg, var(--hero1), var(--hero2));
+      padding: 56px 20px 120px;
     }
-
-    header h1 {
-      font-size: clamp(2rem, 5vw, 3rem);
-      letter-spacing: 1px;
+    #jaring { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: .4;
+      z-index: 0;
+      animation: melayang 12s ease-in-out infinite;
     }
-
-    header p {
-      margin-top: 10px;
-      color: #e9d9c4;
+    .blob.b1 { width: 300px; height: 300px; background: var(--orb1); top: -120px; left: -80px; }
+    .blob.b2 { width: 340px; height: 340px; background: var(--orb2); bottom: -160px; right: -100px; animation-delay: -6s; }
+    @keyframes melayang {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, 24px) scale(1.08); }
     }
-
-    .header-line {
-      width: 60px;
-      height: 3px;
-      background: var(--gold);
-      margin: 20px auto 0;
-      border-radius: 10px;
-    }
-
-    main {
-      max-width: 1050px;
-      margin: -70px auto 45px;
-      padding: 0 18px;
-    }
-
-    .profil {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      padding: 28px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow: 0 8px 28px rgba(65,43,29,.09);
-    }
-
-    .foto-wrapper {
-      flex-shrink: 0;
-      padding: 5px;
-      border: 2px solid var(--gold);
-      border-radius: 17px;
-      background: var(--chip);
-    }
-
-    .foto {
-      display: block;
-      width: 145px;
-      height: 180px;
-      object-fit: cover;
-      object-position: center 20%;
-      border-radius: 12px;
-    }
-
-    .profil-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .label-profil {
-      display: inline-block;
-      color: var(--secondary);
-      background: var(--chip);
-      font-size: .75rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      padding: 5px 12px;
-      border-radius: 30px;
-      margin-bottom: 10px;
-    }
-
-    .profil-info h2 {
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
-    }
-
-    .sub {
-      color: var(--muted);
-      margin-top: 5px;
-    }
-
-    .data {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 15px;
-      margin-top: 22px;
-    }
-
-    .data-item {
-      border-left: 3px solid var(--gold);
-      padding-left: 12px;
-    }
-
-    .data span {
-      display: block;
-      color: var(--muted);
-      font-size: .72rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .data b {
-      display: block;
-      margin-top: 4px;
-      font-size: .91rem;
-    }
-
-    .section-heading {
-      margin: 32px 4px 15px;
-    }
-
-    .section-heading h2 {
-      font-size: 1.3rem;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      font-size: .9rem;
-      margin-top: 3px;
-    }
-
-    .controls {
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 8px 28px rgba(65,43,29,.07);
+      align-items: center;
+      gap: 26px;
     }
+    .foto, .foto-fallback {
+      width: 128px;
+      height: 164px;
+      border-radius: 22px;
+      border: 3px solid var(--node);
+      box-shadow: 0 0 28px color-mix(in srgb, var(--node) 35%, transparent), 0 12px 30px rgba(0, 0, 0, .35);
+      flex-shrink: 0;
+    }
+    .foto { object-fit: cover; object-position: center top; display: block; background: rgba(255, 255, 255, .15); }
+    .foto-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      font-weight: 700;
+      background: rgba(255, 255, 255, .15);
+    }
+    .hero-text { flex: 1 1 280px; }
+    .badges { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .badge, .chip-ai {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid color-mix(in srgb, var(--node) 60%, transparent);
+      background: color-mix(in srgb, var(--node) 14%, transparent);
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .chip-ai em { font-style: normal; }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--node);
+      animation: denyut 1.6s ease-in-out infinite;
+    }
+    @keyframes denyut {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .35; transform: scale(.7); }
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 6vw, 3rem);
+      line-height: 1.15;
+      margin: 12px 0 6px;
+      letter-spacing: -.01em;
+    }
+    .tagline { color: var(--hero-muted); font-size: 1rem; min-height: 1.6em; font-family: Consolas, "Courier New", monospace; }
+    .caret {
+      display: inline-block;
+      width: 8px;
+      height: 1.05em;
+      margin-left: 2px;
+      vertical-align: -2px;
+      background: var(--node);
+      animation: kedip 1s steps(1) infinite;
+    }
+    @keyframes kedip { 50% { opacity: 0; } }
+    .hero .nama { font-size: 1.1rem; font-weight: 600; margin-top: 10px; }
+    .hero .kampus { color: var(--hero-muted); font-size: .95rem; }
 
-    .controls input,
-    .controls select,
-    .controls button {
+    /* ===== Layout ===== */
+    main { max-width: 1000px; margin: 0 auto; padding: 0 16px 40px; }
+
+    /* ===== Statistik ===== */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: -64px;
+      position: relative;
+    }
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px 14px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat b { display: block; font-size: clamp(1.1rem, 4vw, 1.7rem); color: var(--primary); line-height: 1.2; }
+    .stat span { font-size: .8rem; color: var(--muted); }
+
+    /* ===== Toolbar ===== */
+    .toolbar {
+      margin-top: 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 12px;
+    }
+    .toolbar-atas { display: flex; flex-wrap: wrap; gap: 10px; }
+    .toolbar input[type="search"] {
+      flex: 1 1 200px;
+      min-width: 0;
       font: inherit;
       color: var(--text);
-      background: var(--bg);
+      background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 11px 14px;
       outline: none;
     }
-
-    .controls input {
-      flex: 1 1 240px;
-      min-width: 0;
-    }
-
-    .controls input:focus,
-    .controls select:focus {
-      border-color: var(--gold);
-    }
-
-    .controls button {
+    .toolbar input[type="search"]:focus { border-color: var(--primary); }
+    .btn-tema {
+      font: inherit;
+      font-size: .9rem;
       cursor: pointer;
+      color: var(--on-primary);
       background: var(--primary);
-      color: #fffaf2;
-      border-color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 12px;
+      padding: 10px 16px;
       font-weight: 600;
     }
-
-    .controls button:hover {
-      background: var(--secondary);
-    }
-
-    .info {
-      color: var(--muted);
+    .btn-tema:hover { filter: brightness(1.08); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip-btn {
+      font: inherit;
       font-size: .88rem;
-      margin: 18px 5px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 17px;
-    }
-
-    .card {
-      position: relative;
-      background: var(--card);
+      cursor: pointer;
+      color: var(--muted);
+      background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 21px;
-      box-shadow: 0 8px 28px rgba(65,43,29,.07);
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
+      border-radius: 999px;
+      padding: 6px 16px;
+      transition: all .15s ease;
     }
+    .chip-btn:hover { color: var(--text); border-color: var(--primary); }
+    .chip-btn.aktif { color: var(--on-primary); background: var(--primary); border-color: var(--primary); font-weight: 600; }
+    .info { margin: 18px 4px 8px; color: var(--muted); font-size: .9rem; }
 
-    .card::before {
+    /* ===== Timeline ===== */
+    .hari-grup {
+      position: relative;
+      margin-left: 10px;
+      padding: 0 0 8px 24px;
+      border-left: 2px solid var(--border);
+    }
+    .hari-grup:last-child { border-left-color: transparent; }
+    .hari-judul { position: relative; margin: 22px 0 12px; }
+    .hari-judul::before {
       content: "";
       position: absolute;
-      left: 0;
-      top: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(to bottom, var(--gold), var(--primary));
+      left: -33px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--primary);
     }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(65,43,29,.14);
+    .hari-judul h2 { font-size: 1.15rem; }
+    .hari-judul p { color: var(--muted); font-size: .88rem; }
+    .tag-hari-ini {
+      display: inline-block;
+      margin-left: 8px;
+      background: #16a34a;
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 999px;
+      vertical-align: middle;
     }
-
-    .no {
-      color: var(--secondary);
+    .daftar-kartu { display: grid; gap: 12px; }
+    .kartu {
+      --accent: #22d3ee;
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      animation: naik .5s ease both;
+      animation-delay: calc(var(--i, 0) * 60ms);
+    }
+    .kartu:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent), 0 12px 30px color-mix(in srgb, var(--accent) 28%, transparent);
+    }
+    @keyframes naik {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .waktu {
+      flex: 0 0 108px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 14px 8px;
+      text-align: center;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 16%, transparent);
+      border-right: 3px solid var(--accent);
+    }
+    .waktu strong { font-size: 1.15rem; line-height: 1.2; }
+    .waktu small { opacity: .8; font-size: .72rem; }
+    .isi { flex: 1; min-width: 0; padding: 14px 16px; }
+    .isi h3 { font-size: 1.05rem; line-height: 1.3; }
+    .dosen { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .meta span {
       font-size: .78rem;
-      font-weight: 750;
-      letter-spacing: 1px;
+      font-weight: 600;
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      padding: 3px 11px;
+      border-radius: 999px;
     }
+    .kosong { text-align: center; color: var(--muted); padding: 50px 0; }
+    footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 10px 16px 34px; }
 
-    .card h2 {
-      font-size: 1.08rem;
-      margin: 7px 0 17px;
-      line-height: 1.45;
+    @media (max-width: 560px) {
+      .hero { padding-top: 40px; }
+      .hero-inner { justify-content: center; text-align: center; }
+      .badges { justify-content: center; }
+      .kartu { flex-direction: column; }
+      .waktu { flex: none; flex-direction: row; gap: 8px; padding: 10px 14px; border-right: 0; border-bottom: 3px solid var(--accent); }
+      .waktu small { display: none; }
     }
-
-    .row {
-      font-size: .9rem;
-      color: var(--muted);
-      margin-top: 9px;
-    }
-
-    .row b {
-      color: var(--text);
-      font-weight: 650;
-    }
-
-    .chip {
-      display: inline-flex;
-      background: var(--chip);
-      color: var(--primary);
-      font-size: .82rem;
-      font-weight: 750;
-      padding: 7px 14px;
-      border-radius: 30px;
-      margin-top: 17px;
-    }
-
-    .kosong {
-      text-align: center;
-      color: var(--muted);
-      background: var(--card);
-      border: 1px dashed var(--border);
-      border-radius: 15px;
-      padding: 35px 15px;
-      margin-top: 15px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px 15px 35px;
-      color: var(--muted);
-      font-size: .85rem;
-      border-top: 1px solid var(--border);
-    }
-
-    footer strong {
-      color: var(--secondary);
-    }
-
-    @media (max-width: 600px) {
-      header {
-        padding: 48px 16px 100px;
-      }
-
-      main {
-        padding: 0 13px;
-      }
-
-      .profil {
-        flex-direction: column;
-        text-align: center;
-        padding: 22px 16px;
-        gap: 17px;
-      }
-
-      .foto {
-        width: 140px;
-        height: 175px;
-      }
-
-      .data {
-        grid-template-columns: 1fr;
-        text-align: left;
-      }
-
-      .controls {
-        flex-direction: column;
-      }
-
-      .controls input,
-      .controls select,
-      .controls button {
-        width: 100%;
-      }
-
-      .grid {
-        grid-template-columns: 1fr;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      .blob, .dot, .caret, .kartu { animation: none; }
+      .kartu, .chip-btn { transition: none; }
     }
   </style>
 </head>
-
 <body>
-
-  <header>
-    <h1>Semester 3 Planner</h1>
-    <p>Jadwal Kuliah · Teknik Informatika · STIKOM CKI Jakarta</p>
-    <div class="header-line"></div>
+  <header class="hero">
+    <canvas id="jaring" aria-hidden="true"></canvas>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="hero-inner">
+      <div>
+        <img class="foto" id="foto" src="foto.jpg" alt="Foto Muhammad Talkhis Al-Rawi">
+        <div class="foto-fallback" id="fotoFallback" hidden>MT</div>
+      </div>
+      <div class="hero-text">
+        <div class="badges">
+          <span class="badge">Semester 3 Planner</span>
+          <span class="chip-ai"><i class="dot"></i><em id="labelTema">AI mode</em></span>
+        </div>
+        <h1>Jadwal Kuliah Semester 3</h1>
+        <p class="tagline"><span id="ketik"></span><span class="caret"></span></p>
+        <p class="nama">Muhammad Talkhis Al-Rawi</p>
+        <p class="kampus">Teknik Informatika (S1) &middot; STIKOM CKI Jakarta</p>
+      </div>
+    </div>
   </header>
 
   <main>
-
-    <section class="profil">
-
-      <div class="foto-wrapper">
-        <img
-          class="foto"
-          src="./foto.jpg"
-          alt="Foto Muhammad Talkhis Al-Rawi"
-          onerror="this.alt='Foto belum tersedia';"
-        >
-      </div>
-
-      <div class="profil-info">
-        <span class="label-profil">STUDENT PROFILE</span>
-
-        <h2>Muhammad Talkhis Al-Rawi</h2>
-
-        <p class="sub">
-          Mahasiswa Teknik Informatika (Sarjana S1)
-        </p>
-
-        <div class="data">
-
-          <div class="data-item">
-            <span>Nama</span>
-            <b>Muhammad Talkhis Al-Rawi</b>
-          </div>
-
-          <div class="data-item">
-            <span>Kampus</span>
-            <b>STIKOM CKI Jakarta</b>
-          </div>
-
-          <div class="data-item">
-            <span>Program Studi</span>
-            <b>Teknik Informatika (S1)</b>
-          </div>
-
-        </div>
-      </div>
+    <section class="stats" aria-label="Ringkasan jadwal">
+      <div class="stat"><b id="statMatkul">0</b><span>Mata kuliah</span></div>
+      <div class="stat"><b id="statHari">0</b><span>Hari kuliah</span></div>
+      <div class="stat"><b id="statDurasi">0</b><span>Total durasi</span></div>
     </section>
 
-    <div class="section-heading">
-      <h2>Jadwal Perkuliahan</h2>
-      <p>Daftar mata kuliah Semester 3</p>
-    </div>
-
-    <div class="controls">
-
-      <input
-        type="search"
-        id="cari"
-        placeholder="Cari mata kuliah atau dosen..."
-      >
-
-      <select id="filterHari">
-        <option value="">Semua Hari</option>
-      </select>
-
-      <button id="tema" type="button">
-        ☾ Mode Gelap
-      </button>
-
-    </div>
+    <section class="toolbar" aria-label="Pencarian dan filter">
+      <div class="toolbar-atas">
+        <input type="search" id="cari" placeholder="Cari mata kuliah atau dosen..." aria-label="Cari mata kuliah atau dosen">
+        <button type="button" class="btn-tema" id="tema">Ganti tema</button>
+      </div>
+      <div class="chips" id="chips" aria-label="Filter hari"></div>
+    </section>
 
     <p class="info" id="info"></p>
-
-    <section class="grid" id="daftar"></section>
-
-    <p class="kosong" id="kosong" hidden>
-      Tidak ada jadwal yang cocok.
-    </p>
-
+    <section id="timeline" aria-live="polite"></section>
+    <p class="kosong" id="kosong" hidden>Tidak ada jadwal yang cocok dengan pencarianmu.</p>
   </main>
 
   <footer>
-    <p>© 2026 <strong>Semester 3 Planner</strong></p>
-    <p>Muhammad Talkhis Al-Rawi · STIKOM CKI Jakarta</p>
+    &copy; 2026 Semester 3 Planner &middot; Muhammad Talkhis Al-Rawi &middot; STIKOM CKI Jakarta
   </footer>
 
   <script>
-
-    const jadwal = [
-      {
-        matkul: "Matematika Diskrit (A1)",
-        dosen: "Rasiban, M.Kom",
-        hari: "Senin",
-        tanggal: "2026-10-05",
-        mulai: "10:30",
-        selesai: "13:00"
-      },
-      {
-        matkul: "Pemrograman Berorientasi Objek (A1)",
-        dosen: "Veri Arinal, M.Kom",
-        hari: "Selasa",
-        tanggal: "2026-09-29",
-        mulai: "08:00",
-        selesai: "10:30"
-      },
-      {
-        matkul: "Kewarganegaraan (A1)",
-        dosen: "Sri Lestari, S.Pd, M.M",
-        hari: "Selasa",
-        tanggal: "2026-10-06",
-        mulai: "10:30",
-        selesai: "12:10"
-      },
-      {
-        matkul: "Bahasa Jepang (A1)",
-        dosen: "Dr. H Agus Yulistiyono, S.E., M.M",
-        hari: "Selasa",
-        tanggal: "2026-10-06",
-        mulai: "13:30",
-        selesai: "16:00"
-      },
-      {
-        matkul: "Organisasi dan Arsitektur Komputer (A1)",
-        dosen: "Ivan Muhammad Reza, S.Kom., M.Kom",
-        hari: "Rabu",
-        tanggal: "2026-10-07",
-        mulai: "09:00",
-        selesai: "10:30"
-      },
-      {
-        matkul: "Jaringan Komputer (A1)",
-        dosen: "Yuma Akbar, S.Kom., M.Kom",
-        hari: "Rabu",
-        tanggal: "2026-10-07",
-        mulai: "10:30",
-        selesai: "13:00"
-      },
-      {
-        matkul: "Kecerdasan Buatan (A1)",
-        dosen: "Ivan Muhammad Reza, S.Kom., M.Kom",
-        hari: "Kamis",
-        tanggal: "2026-10-08",
-        mulai: "08:00",
-        selesai: "10:30"
-      },
-      {
-        matkul: "Komputasi Paralel dan Terdistribusi (A1)",
-        dosen: "Veri Arinal, M.Kom",
-        hari: "Jumat",
-        tanggal: "2026-10-09",
-        mulai: "13:00",
-        selesai: "15:30"
-      }
+    // ===== Data jadwal =====
+    var jadwal = [
+      { matkul: "Matematika Diskrit (A1)", dosen: "Rasiban, M.Kom", tanggal: "2026-10-05", mulai: "10:30", selesai: "13:00" },
+      { matkul: "Pemrograman Berorientasi Objek (A1)", dosen: "Veri Arinal, M.Kom", tanggal: "2026-09-29", mulai: "08:00", selesai: "10:30" },
+      { matkul: "Kewarganegaraan (A1)", dosen: "Sri Lestari, S.Pd, M.M", tanggal: "2026-10-06", mulai: "10:30", selesai: "12:10" },
+      { matkul: "Bahasa Jepang (A1)", dosen: "Dr. H Agus Yulistiyono, S.E., M.M", tanggal: "2026-10-06", mulai: "13:30", selesai: "16:00" },
+      { matkul: "Organisasi dan Arsitektur Komputer (A1)", dosen: "Ivan Muhammad Reza, S.Kom., M.Kom", tanggal: "2026-10-07", mulai: "09:00", selesai: "10:30" },
+      { matkul: "Jaringan Komputer (A1)", dosen: "Yuma Akbar, S.Kom., M.Kom", tanggal: "2026-10-07", mulai: "10:30", selesai: "13:00" },
+      { matkul: "Kecerdasan Buatan (A1)", dosen: "Ivan Muhammad Reza, S.Kom., M.Kom", tanggal: "2026-10-08", mulai: "08:00", selesai: "10:30" },
+      { matkul: "Komputasi Paralel dan Terdistribusi (A1)", dosen: "Veri Arinal, M.Kom", tanggal: "2026-10-09", mulai: "13:00", selesai: "15:30" }
     ];
 
-    jadwal.sort((a, b) =>
-      (a.tanggal + a.mulai).localeCompare(b.tanggal + b.mulai)
-    );
+    var PALET = {
+      ai: ["#8b5cf6", "#22d3ee", "#14b8a6", "#f472b6", "#38bdf8", "#a78bfa", "#2dd4bf", "#fb7185"],
+      emas: ["#8b5a2b", "#a06a12", "#a0522d", "#7a5c1e", "#b5651d", "#8a6d1f", "#9c4a1a", "#6b4423"]
+    };
+    var IKON = {
+      ai: { bg: "#0a0f1e", a: "#22d3ee", b: "#8b5cf6" },
+      emas: { bg: "#3b2410", a: "#e0b252", b: "#c08a2e" }
+    };
+    var LABEL = { ai: "AI mode", emas: "Gold mode" };
+    var NAMA_HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+    var NAMA_BULAN = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+    var kurangGerak = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const elDaftar = document.getElementById("daftar");
-    const elCari = document.getElementById("cari");
-    const elHari = document.getElementById("filterHari");
-    const elInfo = document.getElementById("info");
-    const elKosong = document.getElementById("kosong");
-    const elTema = document.getElementById("tema");
+    jadwal.forEach(function (j, i) {
+      j.idx = i;
+      var d = j.tanggal.split("-");
+      j.date = new Date(Number(d[0]), Number(d[1]) - 1, Number(d[2]));
+      j.hari = NAMA_HARI[j.date.getDay()];
+    });
+    jadwal.sort(function (a, b) { return (a.tanggal + a.mulai).localeCompare(b.tanggal + b.mulai); });
 
-    function formatTanggal(iso) {
-      const tanggal = new Date(iso + "T00:00:00");
+    // ===== Elemen =====
+    var root = document.documentElement;
+    var elTimeline = document.getElementById("timeline");
+    var elCari = document.getElementById("cari");
+    var elChips = document.getElementById("chips");
+    var elInfo = document.getElementById("info");
+    var elKosong = document.getElementById("kosong");
+    var elTema = document.getElementById("tema");
+    var elLabel = document.getElementById("labelTema");
+    var hariAktif = "";
+    var temaAktif = "ai";
 
-      return tanggal.toLocaleDateString("id-ID", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric"
-      });
+    // ===== Fungsi bantu =====
+    function menitDari(jam) {
+      var p = jam.split(":");
+      return Number(p[0]) * 60 + Number(p[1]);
+    }
+    function formatDurasi(menit) {
+      var j = Math.floor(menit / 60);
+      var m = menit % 60;
+      var teks = "";
+      if (j > 0) teks += j + " jam";
+      if (m > 0) teks += (teks ? " " : "") + m + " menit";
+      return teks || "0 menit";
+    }
+    function formatTanggal(d) {
+      return d.getDate() + " " + NAMA_BULAN[d.getMonth()] + " " + d.getFullYear();
+    }
+    function kunciTanggal(d) {
+      return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    }
+    function buat(tag, kelas, teks) {
+      var el = document.createElement(tag);
+      if (kelas) el.className = kelas;
+      if (teks !== undefined) el.textContent = teks;
+      return el;
     }
 
-    const daftarHari = [
-      "Senin", "Selasa", "Rabu", "Kamis", "Jumat"
-    ];
+    // ===== Ikon web (favicon) mengikuti tema =====
+    function pasangIkon(tema) {
+      var c = IKON[tema];
+      var svg = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>" +
+        "<rect width='64' height='64' rx='14' fill='" + c.bg + "'/>" +
+        "<rect x='10' y='14' width='44' height='40' rx='8' fill='none' stroke='" + c.a + "' stroke-width='3'/>" +
+        "<path d='M10 26H54' stroke='" + c.a + "' stroke-width='3'/>" +
+        "<path d='M22 10V18M42 10V18' stroke='" + c.b + "' stroke-width='4' stroke-linecap='round'/>" +
+        "<path d='M22 44L32 34L42 42' stroke='" + c.b + "' stroke-width='2.5' fill='none' stroke-linejoin='round'/>" +
+        "<circle cx='22' cy='44' r='3.5' fill='" + c.a + "'/>" +
+        "<circle cx='32' cy='34' r='3.5' fill='" + c.a + "'/>" +
+        "<circle cx='42' cy='42' r='3.5' fill='" + c.a + "'/>" +
+        "</svg>";
+      document.getElementById("ikon").setAttribute("href", "data:image/svg+xml," + encodeURIComponent(svg));
+    }
 
-    daftarHari.forEach(function(hari) {
-      const option = document.createElement("option");
-      option.value = hari;
-      option.textContent = hari;
-      elHari.appendChild(option);
-    });
+    // ===== Statistik dengan animasi hitung =====
+    function hitung(el, akhir) {
+      if (kurangGerak) { el.textContent = akhir; return; }
+      var mulai = null;
+      function langkah(t) {
+        if (mulai === null) mulai = t;
+        var p = Math.min((t - mulai) / 900, 1);
+        el.textContent = Math.round(akhir * p);
+        if (p < 1) requestAnimationFrame(langkah);
+      }
+      requestAnimationFrame(langkah);
+    }
+    (function isiStatistik() {
+      var unik = {};
+      var total = 0;
+      jadwal.forEach(function (j) {
+        unik[j.tanggal] = true;
+        total += menitDari(j.selesai) - menitDari(j.mulai);
+      });
+      hitung(document.getElementById("statMatkul"), jadwal.length);
+      hitung(document.getElementById("statHari"), Object.keys(unik).length);
+      document.getElementById("statDurasi").textContent = formatDurasi(total);
+    })();
 
+    // ===== Efek ketik =====
+    (function ketik() {
+      var teks = "Merencanakan semester dengan cerdas.";
+      var el = document.getElementById("ketik");
+      if (kurangGerak) { el.textContent = teks; return; }
+      var i = 0;
+      var timer = setInterval(function () {
+        i++;
+        el.textContent = teks.slice(0, i);
+        if (i >= teks.length) clearInterval(timer);
+      }, 45);
+    })();
+
+    // ===== Chip filter hari =====
+    (function buatChips() {
+      var daftar = [{ nilai: "", label: "Semua" }];
+      ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"].forEach(function (h) { daftar.push({ nilai: h, label: h }); });
+      daftar.forEach(function (c) {
+        var b = buat("button", "chip-btn" + (c.nilai === hariAktif ? " aktif" : ""), c.label);
+        b.type = "button";
+        b.addEventListener("click", function () {
+          hariAktif = c.nilai;
+          var semua = elChips.querySelectorAll(".chip-btn");
+          for (var i = 0; i < semua.length; i++) semua[i].classList.remove("aktif");
+          b.classList.add("aktif");
+          tampilkan();
+        });
+        elChips.appendChild(b);
+      });
+    })();
+
+    // ===== Render jadwal =====
     function tampilkan() {
-      const kata = elCari.value.trim().toLowerCase();
-      const hari = elHari.value;
+      var kata = elCari.value.trim().toLowerCase();
+      var hariIni = kunciTanggal(new Date());
+      var palet = PALET[temaAktif];
 
-      const hasil = jadwal.filter(function(j) {
-        const cocokKata =
-          j.matkul.toLowerCase().includes(kata) ||
-          j.dosen.toLowerCase().includes(kata);
-
-        const cocokHari =
-          hari === "" || j.hari === hari;
-
+      var hasil = jadwal.filter(function (j) {
+        var cocokKata = j.matkul.toLowerCase().indexOf(kata) !== -1 || j.dosen.toLowerCase().indexOf(kata) !== -1;
+        var cocokHari = hariAktif === "" || j.hari === hariAktif;
         return cocokKata && cocokHari;
       });
 
-      elDaftar.innerHTML = "";
+      elTimeline.innerHTML = "";
 
-      hasil.forEach(function(j, index) {
-        const kartu = document.createElement("article");
-        kartu.className = "card";
-
-        const nomor = document.createElement("div");
-        nomor.className = "no";
-        nomor.textContent = "MATA KULIAH #" + (index + 1);
-
-        const judul = document.createElement("h2");
-        judul.textContent = j.matkul;
-
-        const dosen = document.createElement("div");
-        dosen.className = "row";
-        dosen.innerHTML = "<b>Dosen:</b> ";
-        dosen.appendChild(document.createTextNode(j.dosen));
-
-        const tanggal = document.createElement("div");
-        tanggal.className = "row";
-        tanggal.innerHTML = "<b>Tanggal:</b> ";
-        tanggal.appendChild(
-          document.createTextNode(
-            j.hari + ", " + formatTanggal(j.tanggal)
-          )
-        );
-
-        const waktu = document.createElement("span");
-        waktu.className = "chip";
-        waktu.textContent = j.mulai + " - " + j.selesai;
-
-        kartu.append(nomor, judul, dosen, tanggal, waktu);
-        elDaftar.appendChild(kartu);
+      var grup = [];
+      var peta = {};
+      hasil.forEach(function (j) {
+        if (!peta[j.tanggal]) {
+          peta[j.tanggal] = { tanggal: j.tanggal, date: j.date, hari: j.hari, item: [] };
+          grup.push(peta[j.tanggal]);
+        }
+        peta[j.tanggal].item.push(j);
       });
 
-      elInfo.textContent =
-        "Menampilkan " + hasil.length +
-        " dari " + jadwal.length + " mata kuliah";
+      var urut = 0;
+      grup.forEach(function (g) {
+        var kotak = buat("div", "hari-grup");
+        var judul = buat("div", "hari-judul");
+        var h2 = buat("h2", "", g.hari);
+        if (g.tanggal === hariIni) h2.appendChild(buat("span", "tag-hari-ini", "Hari ini"));
+        judul.appendChild(h2);
+        judul.appendChild(buat("p", "", formatTanggal(g.date)));
+        kotak.appendChild(judul);
 
+        var daftarKartu = buat("div", "daftar-kartu");
+        g.item.forEach(function (j) {
+          var kartu = buat("article", "kartu");
+          kartu.style.setProperty("--accent", palet[j.idx % palet.length]);
+          kartu.style.setProperty("--i", urut++);
+
+          var waktu = buat("div", "waktu");
+          waktu.appendChild(buat("strong", "", j.mulai));
+          waktu.appendChild(buat("small", "", "sampai"));
+          waktu.appendChild(buat("strong", "", j.selesai));
+
+          var isi = buat("div", "isi");
+          isi.appendChild(buat("h3", "", j.matkul));
+          isi.appendChild(buat("p", "dosen", j.dosen));
+          var meta = buat("div", "meta");
+          meta.appendChild(buat("span", "", formatDurasi(menitDari(j.selesai) - menitDari(j.mulai))));
+          meta.appendChild(buat("span", "", j.hari + ", " + formatTanggal(j.date)));
+          isi.appendChild(meta);
+
+          kartu.appendChild(waktu);
+          kartu.appendChild(isi);
+          daftarKartu.appendChild(kartu);
+        });
+        kotak.appendChild(daftarKartu);
+        elTimeline.appendChild(kotak);
+      });
+
+      elInfo.textContent = "Menampilkan " + hasil.length + " dari " + jadwal.length + " mata kuliah";
       elKosong.hidden = hasil.length !== 0;
     }
 
-    function aturTema(tema) {
-      document.documentElement.setAttribute("data-theme", tema);
+    // ===== Jaringan saraf di header =====
+    var kanvas = document.getElementById("jaring");
+    var ctx = kanvas.getContext("2d");
+    var titik = [];
+    var lebar = 0;
+    var tinggi = 0;
+    var warnaNode = "#22d3ee";
 
-      elTema.textContent =
-        tema === "dark" ? "☀ Mode Terang" : "☾ Mode Gelap";
+    function ukur() {
+      var r = kanvas.parentElement.getBoundingClientRect();
+      var dpr = window.devicePixelRatio || 1;
+      lebar = r.width;
+      tinggi = r.height;
+      kanvas.width = lebar * dpr;
+      kanvas.height = tinggi * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      var n = Math.max(18, Math.min(52, Math.round(lebar / 20)));
+      titik = [];
+      for (var i = 0; i < n; i++) {
+        titik.push({
+          x: Math.random() * lebar,
+          y: Math.random() * tinggi,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35
+        });
+      }
     }
-
-    let temaAwal = "light";
-
-    try {
-      temaAwal = localStorage.getItem("tema") || "light";
-    } catch (error) {}
-
-    aturTema(temaAwal);
-
-    elTema.addEventListener("click", function() {
-      const sekarang =
-        document.documentElement.getAttribute("data-theme");
-
-      const baru = sekarang === "dark" ? "light" : "dark";
-
-      aturTema(baru);
-
-      try {
-        localStorage.setItem("tema", baru);
-      } catch (error) {}
+    function gambar(gerak) {
+      ctx.clearRect(0, 0, lebar, tinggi);
+      var i, j, a, b, d;
+      for (i = 0; i < titik.length; i++) {
+        a = titik[i];
+        if (gerak) {
+          a.x += a.vx;
+          a.y += a.vy;
+          if (a.x < 0 || a.x > lebar) a.vx *= -1;
+          if (a.y < 0 || a.y > tinggi) a.vy *= -1;
+        }
+      }
+      ctx.fillStyle = warnaNode;
+      ctx.strokeStyle = warnaNode;
+      ctx.lineWidth = 1;
+      for (i = 0; i < titik.length; i++) {
+        a = titik[i];
+        ctx.globalAlpha = 0.8;
+        ctx.beginPath();
+        ctx.arc(a.x, a.y, 1.8, 0, Math.PI * 2);
+        ctx.fill();
+        for (j = i + 1; j < titik.length; j++) {
+          b = titik[j];
+          d = Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+          if (d < 120) {
+            ctx.globalAlpha = (1 - d / 120) * 0.5;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+    function putar() {
+      gambar(true);
+      requestAnimationFrame(putar);
+    }
+    function mulaiJaring() {
+      ukur();
+      if (kurangGerak) gambar(false);
+      else putar();
+    }
+    window.addEventListener("resize", function () {
+      ukur();
+      if (kurangGerak) gambar(false);
     });
 
+    // ===== Tema =====
+    function aturTema(tema) {
+      temaAktif = tema;
+      root.setAttribute("data-theme", tema);
+      elLabel.textContent = LABEL[tema];
+      elTema.textContent = tema === "ai" ? "Ganti ke Coklat Emas" : "Ganti ke Tema AI";
+      var gaya = getComputedStyle(root);
+      warnaNode = gaya.getPropertyValue("--node").trim() || "#22d3ee";
+      document.getElementById("metaTema").setAttribute("content", gaya.getPropertyValue("--hero1").trim() || "#0f1a3a");
+      pasangIkon(tema);
+      if (kurangGerak && titik.length) gambar(false);
+      tampilkan();
+    }
+    var temaAwal = "ai";
+    try {
+      var simpan = localStorage.getItem("temaPlanner");
+      if (simpan === "ai" || simpan === "emas") temaAwal = simpan;
+    } catch (e) {}
+    elTema.addEventListener("click", function () {
+      var baru = temaAktif === "ai" ? "emas" : "ai";
+      aturTema(baru);
+      try { localStorage.setItem("temaPlanner", baru); } catch (e) {}
+    });
+
+    // ===== Foto cadangan jika foto.jpg tidak ditemukan =====
+    var elFoto = document.getElementById("foto");
+    elFoto.addEventListener("error", function () {
+      elFoto.hidden = true;
+      document.getElementById("fotoFallback").hidden = false;
+    });
+
+    // ===== Mulai =====
     elCari.addEventListener("input", tampilkan);
-    elHari.addEventListener("change", tampilkan);
-
-    tampilkan();
-
+    aturTema(temaAwal);
+    mulaiJaring();
   </script>
-
 </body>
 </html>
